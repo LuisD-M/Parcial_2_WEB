@@ -8,17 +8,19 @@ export default class App {
         addButton.addEventListener('click', this.toggleAddPersonForm);
         const newPersonForm = document.getElementById('new-person-form');
         newPersonForm.addEventListener('submit', this.addPerson);
+
+        const modifyButton = document.getElementById('modify-person-btn');
+        modifyButton.addEventListener('click', this.toggleModifyPersonForm);
+        const modifyPersonForm = document.getElementById('modify-person-form');
+        modifyPersonForm.addEventListener('submit', this.modifyPerson);
     }
 
     onSubmit = async (ev) => {
         ev.preventDefault();
-        console.log("Vamos a consultar la lista completa");
-
         const list = await Anime.getGenres();
-        console.log(list);
         this.printResult(list);
-
         document.getElementById('add-person-btn').style.display = 'block'; 
+        document.getElementById('modify-person-btn').style.display = 'block'; 
     }
 
     toggleAddPersonForm = () => {
@@ -39,6 +41,37 @@ export default class App {
 
         document.getElementById('new-person-form').reset(); 
         this.toggleAddPersonForm(); 
+    }
+
+    toggleModifyPersonForm = () => {
+        const form = document.getElementById('modify-person-form');
+        form.style.display = form.style.display === 'none' ? 'block' : 'none'; 
+    }
+
+    modifyPerson = (ev) => {
+        ev.preventDefault();
+        const name = document.getElementById('modify-name').value;
+        const parameter = document.getElementById('modify-parameter').value;
+        const newValue = document.getElementById('new-value').value;
+
+        const users = document.querySelectorAll('.user-card');
+        users.forEach((userDiv) => {
+            const userName = userDiv.querySelector('h2').textContent;
+            if (userName === name) {
+                if (parameter === "name") {
+                    userDiv.querySelector('h2').textContent = newValue;
+                } else if (parameter === "id") {
+                    userDiv.querySelector('.details p:nth-child(1)').innerHTML = `<strong>ID:</strong> ${newValue}`;
+                } else if (parameter === "email") {
+                    userDiv.querySelector('.details p:nth-child(2)').innerHTML = `<strong>Email:</strong> ${newValue}`;
+                } else if (parameter === "work") {
+                    userDiv.querySelector('.details p:nth-child(3)').innerHTML = `<strong>Work:</strong> ${newValue}`;
+                }
+            }
+        });
+
+        document.getElementById('modify-person-form').reset();
+        this.toggleModifyPersonForm();  // Cerrar el formulario de modificación después de la modificación
     }
 
     printResult = (list, isNewUser = false) => {
@@ -66,9 +99,9 @@ export default class App {
             const details = document.createElement('div');
             details.className = 'details';
             details.innerHTML = `
-                <strong>ID:</strong> ${user.id} <br>
-                <strong>Email:</strong> ${user.email} <br>
-                <strong>Work:</strong> ${user.work}
+                <p><strong>ID:</strong> ${user.id}</p>
+                <p><strong>Email:</strong> ${user.email}</p>
+                <p><strong>Work:</strong> ${user.work}</p>
             `;
             userDiv.appendChild(details);
 

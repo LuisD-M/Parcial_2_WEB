@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parcial 2</title>
-
     <link rel="stylesheet" href="./styles/apis.css">
-    
     <link rel="icon" href="path_to_favicon.ico">
-
 </head>
 
 <body>
@@ -30,13 +27,28 @@
                 <button type="submit">Agregar</button>
             </form>
         </div>
+        <button id="modify-person-btn" style="display:none;">Modificar Persona</button>
+        <div id="modify-person-form" style="display:none;">
+            <h2>Modificar Persona</h2>
+            <form id="modify-person-form">
+                <input type="text" id="modify-name" placeholder="Nombre de la Persona a Modificar" required>
+                <select id="modify-parameter" required>
+                    <option value="" disabled selected>Seleccionar parámetro</option>
+                    <option value="name">Nombre</option>
+                    <option value="id">ID</option>
+                    <option value="email">Email</option>
+                    <option value="work">Trabajo</option>
+                </select>
+                <input type="text" id="new-value" placeholder="Nuevo Valor" required>
+                <button type="submit">Modificar</button>
+            </form>
+        </div>
     </header>
 
     <main>
         <pre><code id="result"></code></pre>
     </main>
 
-    
     <script type="module" src="./main.js"></script>
 </body>
 </html>
