@@ -1,29 +1,27 @@
 import Anime from "./anime.js";
 
-export default class App{
+export default class App {
     /* Modificar el DOM / escuchar eventos */
 
-    constructor(){
+    constructor() {
         let item = document.getElementById('anime-form');
-        item.addEventListener('submit', this.#onSubmit );
-
-        item = document.getElementById('anime-id');
-        item.addEventListener('submit', this.#onSubmit);
+        item.addEventListener('submit', this.onSubmit.bind(this));  // Listener para el formulario de consulta
     }
 
-    #onSubmit = async (ev) => {            
+    // Método para manejar el submit y traer la lista
+    async onSubmit(ev) {            
         ev.preventDefault();  // Evitar el comportamiento por defecto del form
         console.log("Vamos a consultar la lista completa");
         
         const list = await Anime.getGenres();  // Obtener la lista completa
         console.log(list);
 
-        this.#printResult(JSON.stringify(list));  // Mostrar el resultado en la página
+        this.printResult(JSON.stringify(list, null, 2));  // Mostrar el resultado en la página, formateado para mejor visualización
     }
 
-    //Mostrar en la pagina lo que se esta mostrando en consola
-    #printResult = (data) =>{
-        const result = document.querySelector("#result")
+    // Mostrar el resultado en la página en el <pre><code> del HTML
+    printResult(data) {
+        const result = document.querySelector("#result");
         result.textContent = data;
     }
 }
