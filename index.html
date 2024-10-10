@@ -18,11 +18,24 @@
         <form action="#" id="anime-form">
             <button type="submit">Consultar</button>
         </form>
+        <button id="add-person-btn" style="display:none;">Agregar Persona</button>
+        <div id="add-person-form" style="display:none;">
+            <h2>Agregar Nueva Persona</h2>
+            <form id="new-person-form">
+                <input type="text" id="name" placeholder="Nombre" required>
+                <input type="number" id="id" placeholder="ID" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="text" id="work" placeholder="Trabajo" required>
+                <input type="url" id="photo" placeholder="URL de la Foto" required>
+                <button type="submit">Agregar</button>
+            </form>
+        </div>
     </header>
 
     <main>
         <pre><code id="result"></code></pre>
     </main>
+
     
     <script type="module" src="./main.js"></script>
 </body>

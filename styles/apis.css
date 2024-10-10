@@ -1,15 +1,40 @@
-body{
-    font-size: 2em;
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px; 
+    width: 100%; 
 }
 
-.error{
-    background-color: red;
+.user-card {
+    background-color: #0fcbe496; 
+    border: 1px solid #ccc; 
+    padding: 15px; 
+    text-align: center; 
+    width: 100%; 
+    box-sizing: border-box; 
 }
 
-.ok{
-    background-color: green;
+.user-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
 }
 
-.neutral{
-    background-color: aqua;
+.user-card h2 {
+    margin-bottom: 10px;
+    font-size: 2em; 
+    color: #f80303; 
+}
+
+.user-card .details {
+    font-size: 1.2em; 
+    margin-top: 10px;
+    text-align: left;  
+    font-weight: bold; 
+}
+
+.user-card .details p {
+    margin: 5px 0;
+    font-size: 1em; 
 }

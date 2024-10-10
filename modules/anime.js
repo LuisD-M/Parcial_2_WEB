@@ -13,16 +13,13 @@ export default class Anime {
         let list = [];  // Crear un listado para exportar elementos
 
         try {
-            const resp = await fetch('http://ec2-3-138-183-128.us-east-2.compute.amazonaws.com:4010/users');  // Llamado a la API
+            const resp = await fetch('http://ec2-3-138-183-128.us-east-2.compute.amazonaws.com:4010/users');  
 
-            if (!resp.ok) {  // Verificar si hubo algún problema con la respuesta
+            if (!resp.ok) {  
                 throw new Error(`HTTP error! status: ${resp.status}`);
             }
+            const data = await resp.json();  
 
-            const data = await resp.json();  // Aquí ya es un array directamente
-            console.log("Datos recibidos:", data);  // Mostrar los datos en la consola para confirmarlo
-
-            // Recorrer los datos y agregarlos a la lista
             data.forEach(element => {
                 list.push(new Anime(element.id, element.firstName, element.jobTitle, element.photo, element.email));  // Nombres API
             });
